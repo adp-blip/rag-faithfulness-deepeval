@@ -76,28 +76,32 @@ pytest -q                                                   # offline tests (ret
 
 ## Results
 
-Run on 2026-10-21 via Groq: generator `gpt-oss-20b`, judge `gpt-oss-120b`. So far this covers the **naive** prompt; the grounded-prompt run is still in progress and will be added to the same table.
+Run on 2026-10-21 via Groq: generator `gpt-oss-20b`, judge `gpt-oss-120b`, same 16 questions and retriever for both prompts. Per-question scores, answers and judge reasons are in [`results/summary.md`](results/summary.md).
 
 Average score per metric, pass count in brackets. Unanswerable questions are only scored on faithfulness, abstention and citations. Citations are only scored for the grounded prompt (the naive prompt doesn't ask for them).
 
 | run | faithfulness | answer_relevancy | contextual_recall | abstention | citations | cases fully passed |
 |---|---|---|---|---|---|---|
+| `grounded__openai_gpt-oss-20b` | 0.96 (14/16) | 0.92 (10/12) | 0.92 (10/12) | 0.91 (14/16) | 1.00 (16/16) | **12/16** |
 | `naive__openai_gpt-oss-20b` | 1.00 (16/16) | 0.97 (11/12) | 0.96 (11/12) | 0.91 (15/16) | - | **13/16** |
 
 ### By question type
 
 | run | type | passed |
 |---|---|---|
+| `grounded__openai_gpt-oss-20b` | single | 6/9 |
+| `grounded__openai_gpt-oss-20b` | multi_hop | 2/3 |
+| `grounded__openai_gpt-oss-20b` | unanswerable | 4/4 |
 | `naive__openai_gpt-oss-20b` | single | 8/9 |
 | `naive__openai_gpt-oss-20b` | multi_hop | 2/3 |
 | `naive__openai_gpt-oss-20b` | unanswerable | 3/4 |
 
 **What stands out**
 
-- Faithfulness was perfect (16/16): when the model answered, it stuck to the retrieved text.
-- The real failure is abstention. Asked how many PTO days contractors get, the model reasoned "the policy only covers employees, so contractors get none" and stated that as fact. The handbook never says that. It's a plausible inference, but presenting it as policy is the kind of confident hallucination this eval exists to catch.
-- On the multi-hop course-budget question, contextual recall dropped to 0.5. Both documents were retrieved, but the judge found no retrieved chunk supporting "it comes out of the 1,000 EUR learning budget", so half of the expected answer had no grounding in the context. Paragraph-level BM25 chunks are the weak spot here.
-- Full per-question scores and judge reasons are in [`results/summary.md`](results/summary.md).
+- **Grounding fixed hallucination on unanswerable questions (3/4 → 4/4).** Asked how many PTO days contractors get, the naive prompt reasoned "the policy only covers employees, so contractors get none" and stated it as policy. The grounded prompt said "The handbook doesn't cover this." Every citation it produced pointed at a chunk that was actually retrieved (16/16).
+- **But it cost accuracy on answerable questions (8/9 → 6/9 single-fact).** On the course-budget question it wrote that the home office stipend is "only for monitors, keyboards, and mice". The handbook never says "only", and faithfulness caught it. On the premium-economy question it added a half-right aside about the learning budget.
+- **Not every failure is the model's.** On "when do salary changes take effect?" the answer was correct ("1 April [performance]") but answer relevancy scored it 0.5, treating the citation tag as irrelevant content. On the probation question the answer was correct but left out the post-probation notice period, and the abstention rubric marked it down. Both are grader artifacts worth knowing about before trusting the totals.
+- Net: the grounded prompt is the safer one for a policy bot (it stops making things up), and the remaining errors are about over-confident paraphrasing, which a stricter "quote, don't summarise" rule would likely target.
 
 ## Credits
 
