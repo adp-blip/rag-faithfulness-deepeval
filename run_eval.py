@@ -84,7 +84,7 @@ def main():
                                     "reason": m.reason}
                 except Exception as e:  # one flaky judge call shouldn't sink the whole run
                     scores[name] = {"score": None, "pass": False, "reason": f"error: {e}"}
-            ok = all(s["pass"] for s in scores.values())
+            ok = all(s["pass"] for k, s in scores.items() if not (k == "citations" and variant == "naive"))
             print(f"  {'PASS' if ok else 'FAIL'} {g['id']} "
                   + " ".join(f"{k[:5]}={v['score']}" for k, v in scores.items()))
             rows.append({**g, "variant": variant, "model": args.model, "actual_output": reply,

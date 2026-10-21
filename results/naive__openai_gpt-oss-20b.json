@@ -1,0 +1,676 @@
+[
+  {
+    "id": "q01",
+    "type": "single",
+    "input": "How many PTO days can I carry over to next year?",
+    "expected_output": "At most 5 unused PTO days carry over; the rest is lost on 1 January.",
+    "sources": [
+      "pto"
+    ],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "You can carry over **up to 5 unused PTO days** into the next year. Anything beyond that is lost on January 1.",
+    "retrieved": [
+      "pto",
+      "sick_leave",
+      "sick_leave"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "answer_relevancy": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because the response fully addressed the question about PTO carry‑over with no irrelevant content."
+      },
+      "contextual_recall": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because sentence 1 is directly supported by node 1 in retrieval context."
+      },
+      "abstention": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The actual output states up to 5 unused PTO days can be carried over, matching the expected answer of at most 5 days and correctly noting that excess days are lost, fulfilling the alignment criteria."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q02",
+    "type": "single",
+    "input": "How far in advance do I need to request a week off?",
+    "expected_output": "Requests of 3 or more consecutive days must be submitted in Workday at least 2 weeks in advance.",
+    "sources": [
+      "pto"
+    ],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "For a week‑long (3 or more consecutive days) PTO request, you must submit it in Workday **at least 2 weeks in advance**.",
+    "retrieved": [
+      "pto",
+      "onboarding",
+      "pto"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "answer_relevancy": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because the response fully addressed the question with no irrelevant content, earning a perfect relevancy rating."
+      },
+      "contextual_recall": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because sentence 1 directly aligns with node 1 in the retrieval context, confirming a perfect match."
+      },
+      "abstention": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The actual output directly provides the required answer, matching the expected phrasing about submitting requests of 3+ consecutive days at least 2 weeks in advance, and does not incorrectly claim the handbook lacks coverage."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q03",
+    "type": "single",
+    "input": "When do I need a doctor's note for sick leave?",
+    "expected_output": "A doctor's note is needed for absences longer than 3 consecutive working days, uploaded in Workday.",
+    "sources": [
+      "sick_leave"
+    ],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "You need to provide a doctor’s note in Workday when your sick leave extends **beyond 3 consecutive working days**. For any shorter absence, a note isn’t required.",
+    "retrieved": [
+      "sick_leave",
+      "sick_leave",
+      "sick_leave"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "answer_relevancy": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because the response fully addressed the question about when a doctor's note is needed for sick leave, with no irrelevant content."
+      },
+      "contextual_recall": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because sentence 1 directly matches node 1 in the retrieval context, confirming the information exactly."
+      },
+      "abstention": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The actual output directly states that a doctor's note is required for sick leave longer than 3 consecutive working days and must be uploaded in Workday, which matches the expected answer exactly and does not claim the handbook lacks coverage."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q04",
+    "type": "single",
+    "input": "Can I fly premium economy to a conference in Singapore? The flight is 13 hours.",
+    "expected_output": "Yes. Premium economy is allowed on flights longer than 8 hours; book through TravelPerk.",
+    "sources": [
+      "expenses"
+    ],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "Yes – because the flight is 13 hours long, premium‑economy is allowed under the travel policy. Since conference travel is paid from the travel budget (not the learning budget), you can book premium‑economy for that leg.",
+    "retrieved": [
+      "expenses",
+      "learning",
+      "remote_work"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "answer_relevancy": {
+        "score": 0.6,
+        "pass": false,
+        "reason": "The score is 0.60 because the response included unrelated details about budget sources and learning budget, which do not address the user's question about using premium economy for a 13‑hour flight to Singapore."
+      },
+      "contextual_recall": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because sentence 1 is fully covered by node 1 in the retrieval context, matching both the TravelPerk booking instruction and the premium economy eligibility for flights over 8 hours."
+      },
+      "abstention": {
+        "score": 0.9,
+        "pass": true,
+        "reason": "The actual output correctly states that premium economy is allowed for a 13‑hour flight, matching the expected answer that it is permitted on flights longer than 8 hours. It also adds extra but not contradictory details about budgeting, and does not claim the handbook lacks coverage, satisfying the evaluation steps."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q05",
+    "type": "single",
+    "input": "What's the daily meal allowance when travelling for work, and is wine covered?",
+    "expected_output": "Up to 50 EUR per day; alcohol is not reimbursed.",
+    "sources": [
+      "expenses"
+    ],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "The daily meal allowance for business travel is **up to 50 EUR per day**.  \n**Wine (or any alcohol) is not reimbursed**.",
+    "retrieved": [
+      "expenses",
+      "sick_leave",
+      "remote_work"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "answer_relevancy": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because the response was fully relevant to the question, with no extraneous or off‑topic statements."
+      },
+      "contextual_recall": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because sentence 1 directly matches node 1 in the retrieval context."
+      },
+      "abstention": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The actual output provides the exact answer from the expected output—up to 50 EUR per day and no reimbursement for wine—without adding unrelated information, fully satisfying the evaluation steps."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q06",
+    "type": "single",
+    "input": "Can I use SMS codes for two-factor authentication on GitHub?",
+    "expected_output": "No. 2FA must use the Okta Verify app; SMS codes are not allowed.",
+    "sources": [
+      "security"
+    ],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "No. According to the security policy, SMS codes are disallowed for two‑factor authentication on GitHub (and the other services). You must use the Okta Verify app instead.",
+    "retrieved": [
+      "security",
+      "security",
+      "equipment"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "answer_relevancy": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because the response fully addressed the question about using SMS codes for two-factor authentication on GitHub with no irrelevant content."
+      },
+      "contextual_recall": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because sentence 1 directly aligns with node 1 in the retrieval context, confirming a perfect match."
+      },
+      "abstention": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The actual output correctly states that SMS codes are disallowed and that Okta Verify must be used, matching the expected answer without adding unrelated information."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q07",
+    "type": "single",
+    "input": "I lost my laptop on the train at 23:00. What do I do?",
+    "expected_output": "Report it to security@lumenlabs.example within 1 hour, even outside working hours.",
+    "sources": [
+      "security"
+    ],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "Since it’s after core collaboration hours, the first thing you should do is report the loss to security. Send an email to **security@lumenlabs.example** (or use the security reporting tool if you have one) and include:\n\n* The time you lost the laptop (23:00)  \n* The location (train, approximate route)  \n* Any identifying details (model, serial number, color, stickers, etc.)  \n\nSecurity must be notified within one hour, even outside working hours, so act immediately.  \n\nAfter you’ve reported it, you can open a ticket in the IT portal to request a loaner laptop if you need one for the next day. The loaner is available the same day in the Berlin and Lisbon offices, but the priority is to get the loss reported to security first.",
+    "retrieved": [
+      "remote_work",
+      "equipment",
+      "security"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "answer_relevancy": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because the response fully addressed the user's query with no irrelevant content."
+      },
+      "contextual_recall": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because sentence 1 directly matches node 3 in the retrieval context."
+      },
+      "abstention": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The actual response correctly states to report the loss to security@lumenlabs.example within one hour, even outside working hours, matching the expected answer and not claiming the handbook lacks coverage."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q08",
+    "type": "single",
+    "input": "What's the notice period if I resign during probation?",
+    "expected_output": "2 weeks during the 6-month probation period (1 month after probation).",
+    "sources": [
+      "onboarding"
+    ],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "If you resign during the probation period, the notice period is **2 weeks**.",
+    "retrieved": [
+      "onboarding",
+      "equipment",
+      "sick_leave"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "answer_relevancy": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because the response fully addressed the question about the notice period during probation with no irrelevant content."
+      },
+      "contextual_recall": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because sentence 1 directly matches information from node 1 in the retrieval context, which states the probation period is 6 months and the notice period is 2 weeks, becoming 1 month after probation."
+      },
+      "abstention": {
+        "score": 0.7,
+        "pass": true,
+        "reason": "The expected output provides a specific answer (2 weeks during the 6‑month probation period, with a note about 1 month after probation). The actual output correctly states the notice period as 2 weeks, satisfying the requirement to give the answer, but it omits the contextual details about the probation length and the post‑probation timing, so it is only partially aligned."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q09",
+    "type": "multi_hop",
+    "input": "I want to buy a 350 EUR online course. Do I need approval, and does it come out of my home office stipend?",
+    "expected_output": "Yes, purchases over 300 EUR need manager approval first. It comes out of the 1,000 EUR yearly learning budget, not the home office stipend.",
+    "sources": [
+      "learning",
+      "remote_work"
+    ],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "Yes – because the course costs €350, it exceeds the €300 threshold for learning purchases, so you’ll need your manager’s approval before you buy it.\n\nAnd no, it won’t be deducted from the €400 home‑office stipend. The stipend is only for a monitor, keyboard, and mouse (and any other home‑office equipment you need). The learning budget is a separate line item, so you’ll need to request approval through the usual learning‑budget process.",
+    "retrieved": [
+      "equipment",
+      "remote_work",
+      "learning"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "answer_relevancy": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because the response fully addressed the question with no irrelevant statements."
+      },
+      "contextual_recall": {
+        "score": 0.5,
+        "pass": false,
+        "reason": "The score is 0.50 because sentence 1 aligns with node 3 in the retrieval context, while sentence 2 has no supporting node."
+      },
+      "abstention": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The actual output correctly states that manager approval is required for purchases over 300 EUR and that the cost is covered by the learning budget rather than the home‑office stipend, matching the expected answer without claiming the handbook lacks coverage."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q10",
+    "type": "multi_hop",
+    "input": "Is a new monitor for home paid separately or from the stipend, and how much is the stipend?",
+    "expected_output": "It comes out of the one-time 400 EUR home office stipend, not a separate budget.",
+    "sources": [
+      "equipment",
+      "remote_work"
+    ],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "A new monitor (along with a keyboard and mouse) is covered by the **home‑office stipend**.  \nThe stipend is **€400** and can be claimed through the expense tool within 90 days of your start date.",
+    "retrieved": [
+      "equipment",
+      "remote_work",
+      "pto"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "answer_relevancy": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because the response fully addressed the question about monitor payment and stipend amount with no irrelevant content."
+      },
+      "contextual_recall": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because sentence 1 directly matches node(s) in retrieval context: the first node mentions \"...come out of the 400 EUR home office stipend, not a separate budget...\" and the second node references the \"one-time home office stipend of 400 EUR,\" fully supporting the expected output."
+      },
+      "abstention": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The actual output provides the same answer as the expected output, stating the monitor is covered by the one-time €400 home office stipend and does not claim the handbook lacks coverage, fully meeting the evaluation criteria."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q11",
+    "type": "multi_hop",
+    "input": "I joined 4 months ago and my partner is due to give birth. Do I get the full 12 weeks paid leave as the non-birthing parent?",
+    "expected_output": "Not yet: full paid leave requires at least 6 months of employment; before that statutory rules apply. Non-birthing parents get 12 weeks once eligible.",
+    "sources": [
+      "parental_leave"
+    ],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "No. Because you’ve only been employed for 4 months, you don’t meet the 6‑month requirement for the full paid parental leave. You’ll be covered by the statutory leave rules instead of the 12‑week fully paid entitlement for non‑birthing parents.",
+    "retrieved": [
+      "parental_leave",
+      "parental_leave",
+      "parental_leave"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "answer_relevancy": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because the response fully addressed the question about non-birthing parent leave without any irrelevant content."
+      },
+      "contextual_recall": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because sentence 1 is directly supported by node 3 and sentence 2 is directly supported by node 1 in the retrieval context."
+      },
+      "abstention": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The actual output correctly states that the employee does not qualify for the full 12‑week paid leave because they have only been employed for 4 months, matching the expected answer that full paid leave requires at least 6 months and that statutory rules apply beforehand."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q12",
+    "type": "single",
+    "input": "When do salary changes take effect?",
+    "expected_output": "Salary adjustments are decided in the March review cycle and take effect from 1 April.",
+    "sources": [
+      "performance"
+    ],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "Salary changes take effect on **1 April**.",
+    "retrieved": [
+      "performance",
+      "pto",
+      "equipment"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "answer_relevancy": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because the response fully addressed the question about when salary changes take effect with no irrelevant content."
+      },
+      "contextual_recall": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because sentence 1 directly matches node 1, which states that salary adjustments are decided in the March cycle and take effect from 1 April."
+      },
+      "abstention": {
+        "score": 0.8,
+        "pass": true,
+        "reason": "The expected output provides a concrete answer about salary changes taking effect on 1 April (and mentions the March review cycle). The actual output correctly states the effective date as 1 April, satisfying the requirement to give the answer and not claim the handbook lacks coverage. It omits the extra detail about the March review cycle, so it is not a perfect match but still aligns well with the expected answer."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q13",
+    "type": "unanswerable",
+    "input": "Does Lumen Labs pay for a gym membership?",
+    "expected_output": "The handbook doesn't cover this.",
+    "sources": [],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "There’s no mention in the provided context that Lumen Labs covers gym memberships. If you’re looking for that benefit, you might want to check the company’s benefits handbook or ask HR directly.",
+    "retrieved": [
+      "remote_work",
+      "equipment",
+      "equipment"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "abstention": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The actual output correctly states that there is no mention of gym membership coverage and advises checking the handbook, matching the expected response that the handbook doesn't cover this, without providing a concrete answer."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q14",
+    "type": "unanswerable",
+    "input": "What is the company's 401k match percentage?",
+    "expected_output": "The handbook doesn't cover this.",
+    "sources": [],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "I’m sorry, but the information about the company’s 401(k) match isn’t included in the context you provided.",
+    "retrieved": [
+      "equipment",
+      "sick_leave",
+      "remote_work"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "abstention": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The expected output indicates the handbook doesn't cover the question, and the actual response correctly states that the information isn’t included and provides no concrete answer, fully complying with step 1."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q15",
+    "type": "unanswerable",
+    "input": "Can I bring my dog to the Berlin office?",
+    "expected_output": "The handbook doesn't cover this.",
+    "sources": [],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "I’m not aware of any policy that allows pets in the Berlin office. If you’re unsure, it’s best to check with the office manager or HR for clarification.",
+    "retrieved": [
+      "equipment",
+      "remote_work",
+      "equipment"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating a perfectly faithful output!"
+      },
+      "abstention": {
+        "score": 0.9,
+        "pass": true,
+        "reason": "The expected output indicates the handbook doesn't cover the question, and the actual response states it is not aware of any policy and advises checking with HR, thus not providing a concrete answer. This aligns well with step 1, though it could be slightly clearer about the lack of coverage."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  },
+  {
+    "id": "q16",
+    "type": "unanswerable",
+    "input": "How many PTO days do contractors get?",
+    "expected_output": "The handbook doesn't cover this.",
+    "sources": [],
+    "variant": "naive",
+    "model": "groq:openai/gpt-oss-20b",
+    "actual_output": "The policy only specifies PTO for full‑time and part‑time employees. Contractors are not covered by the PTO provision, so they do not receive any paid time off under this policy.",
+    "retrieved": [
+      "pto",
+      "sick_leave",
+      "learning"
+    ],
+    "scores": {
+      "faithfulness": {
+        "score": 1.0,
+        "pass": true,
+        "reason": "The score is 1.00 because there are no contradictions, indicating the actual output perfectly aligns with the retrieval context. Great job!"
+      },
+      "abstention": {
+        "score": 0.2,
+        "pass": false,
+        "reason": "The expected output requires stating that the handbook doesn't cover the question, but the actual output provides a definitive answer that contractors receive no PTO, which is a concrete policy claim. This violates step 1, so the response is poorly aligned."
+      },
+      "citations": {
+        "score": 0.0,
+        "pass": false,
+        "reason": "no citations"
+      }
+    },
+    "passed": false
+  }
+]

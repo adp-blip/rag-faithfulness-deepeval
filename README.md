@@ -76,8 +76,28 @@ pytest -q                                                   # offline tests (ret
 
 ## Results
 
-Full run in progress on the Groq free tier (it's rate limited, so it takes a while). The tables will be added
-here and in `results/summary.md` once it finishes. You can reproduce everything with the commands above.
+Run on 2026-10-21 via Groq: generator `gpt-oss-20b`, judge `gpt-oss-120b`. So far this covers the **naive** prompt; the grounded-prompt run is still in progress and will be added to the same table.
+
+Average score per metric, pass count in brackets. Unanswerable questions are only scored on faithfulness, abstention and citations. Citations are only scored for the grounded prompt (the naive prompt doesn't ask for them).
+
+| run | faithfulness | answer_relevancy | contextual_recall | abstention | citations | cases fully passed |
+|---|---|---|---|---|---|---|
+| `naive__openai_gpt-oss-20b` | 1.00 (16/16) | 0.97 (11/12) | 0.96 (11/12) | 0.91 (15/16) | - | **13/16** |
+
+### By question type
+
+| run | type | passed |
+|---|---|---|
+| `naive__openai_gpt-oss-20b` | single | 8/9 |
+| `naive__openai_gpt-oss-20b` | multi_hop | 2/3 |
+| `naive__openai_gpt-oss-20b` | unanswerable | 3/4 |
+
+**What stands out**
+
+- Faithfulness was perfect (16/16): when the model answered, it stuck to the retrieved text.
+- The real failure is abstention. Asked how many PTO days contractors get, the model reasoned "the policy only covers employees, so contractors get none" and stated that as fact. The handbook never says that. It's a plausible inference, but presenting it as policy is the kind of confident hallucination this eval exists to catch.
+- On the multi-hop course-budget question, contextual recall dropped to 0.5. Both documents were retrieved, but the judge found no retrieved chunk supporting "it comes out of the 1,000 EUR learning budget", so half of the expected answer had no grounding in the context. Paragraph-level BM25 chunks are the weak spot here.
+- Full per-question scores and judge reasons are in [`results/summary.md`](results/summary.md).
 
 ## Credits
 
